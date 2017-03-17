@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "96098e473b028cdb2529580554a1ae3e",
+    "content-hash": "a104971ced8d0311af25247b9926a7fa",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -266,6 +266,55 @@
             "time": "2015-04-20T18:58:01+00:00"
         },
         {
+            "name": "laracasts/flash",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/flash.git",
+                "reference": "03eec812fd6ae948664ff51b4320785f6d15ee5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/flash/zipball/03eec812fd6ae948664ff51b4320785f6d15ee5d",
+                "reference": "03eec812fd6ae948664ff51b4320785f6d15ee5d",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://pkg.laravel-china.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Laracasts\\Flash": "src/"
+                },
+                "files": [
+                    "src/Laracasts/Flash/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Easy flash notifications",
+            "time": "2016-07-11T20:46:02+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v5.4.15",
             "source": {
@@ -474,7 +523,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/thephpleague/flysystem/dda7f3ab94158a002d9846a97dc18ebfb7acc062.zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/dda7f3ab94158a002d9846a97dc18ebfb7acc062",
                 "reference": "dda7f3ab94158a002d9846a97dc18ebfb7acc062",
                 "shasum": "",
                 "mirrors": [
@@ -804,6 +853,51 @@
             "time": "2017-03-05T18:23:57+00:00"
         },
         {
+            "name": "overtrue/laravel-ueditor",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-ueditor.git",
+                "reference": "57cb9cdefb478d318feaa88621f9a6b5c31a283b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-ueditor/zipball/57cb9cdefb478d318feaa88621f9a6b5c31a283b",
+                "reference": "57cb9cdefb478d318feaa88621f9a6b5c31a283b",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://pkg.laravel-china.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "qiniu/php-sdk": "7.*"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "^1.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelUEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "UEditor integration for Laravel.",
+            "time": "2017-02-26T06:37:31+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v2.0.9",
             "source": {
@@ -988,6 +1082,63 @@
                 "shell"
             ],
             "time": "2017-03-01T00:13:29+00:00"
+        },
+        {
+            "name": "qiniu/php-sdk",
+            "version": "v7.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/qiniu/php-sdk.git",
+                "reference": "b91653485e36b4797d7a302cc86c49695e47a642"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/qiniu/php-sdk/zipball/b91653485e36b4797d7a302cc86c49695e47a642",
+                "reference": "b91653485e36b4797d7a302cc86c49695e47a642",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://pkg.laravel-china.org/repo/packagist/dists/%package%/%version%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Qiniu\\": "src/Qiniu"
+                },
+                "files": [
+                    "src/Qiniu/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Qiniu",
+                    "email": "sdk@qiniu.com",
+                    "homepage": "http://www.qiniu.com"
+                }
+            ],
+            "description": "Qiniu Resource (Cloud) Storage SDK for PHP",
+            "homepage": "http://developer.qiniu.com/",
+            "keywords": [
+                "cloud",
+                "qiniu",
+                "sdk",
+                "storage"
+            ],
+            "time": "2016-11-18T02:57:31+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -2856,7 +3007,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/phpunit/b99112aecc01f62acf3d81a3f59646700a1849e5.zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b99112aecc01f62acf3d81a3f59646700a1849e5",
                 "reference": "b99112aecc01f62acf3d81a3f59646700a1849e5",
                 "shasum": "",
                 "mirrors": [
