@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
     use Notifiable;
-    use SoftDeletes;
+    // use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -36,11 +36,7 @@ class User extends Authenticatable
 
     public function article()
     {
-        return $this->belongsTo(Article::class, 'user_id', 'id');
+        return $this->hasMany(Article::class, 'user_id', 'id');
     }
 
-    public function comment()
-    {
-        return $this->hasMany(Comment::class, 'article_id', 'id');
-    }
 }

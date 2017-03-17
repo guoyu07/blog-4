@@ -117,4 +117,17 @@ class ArticleController extends Controller
         $res = Blog::delArticle($request->id, $user_id);
         return $res;
     }
+
+    public function home()
+    {
+        $articles = Blog::getAllArticles();
+    }
+
+    public function userHome()
+    {
+        $user_id = Auth::user()->id;
+        $articles = Blog::getAllArticles();
+        $noti_count = Blog::getCommentNotifiction($user_id);
+        dd($articles, $noti_count);
+    }
 }

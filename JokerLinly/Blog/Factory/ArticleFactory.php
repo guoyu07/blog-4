@@ -3,6 +3,7 @@ namespace JokerLinly\Blog\Factory;
 use JokerLinly\Blog\Models\Article;
 use JokerLinly\Blog\Models\ArticleTag;
 use JokerLinly\Blog\Models\Comment;
+use JokerLinly\Blog\Models\User;
 
 /**
 * 
@@ -89,5 +90,20 @@ class ArticleFactory
     {
         return Article::where('user_id', $user_id)
             ->with(['tag', 'user', 'comment', 'comment.user'])->get();
+    }
+
+    public static function getAllArticles()
+    {
+        return Article::where('is_blocked', 0)
+            ->with(['tag', 'comment', 'comment.user'])->get();
+    }
+
+    public static function getCommentNotifiction($user_id)
+    {
+        return Comment::where('is_read', 0)
+            ->whereHas('article', function ($query) use ($user_id){
+                $query->where('user_id', $user_id);
+            })
+            ->count();
     }
 }

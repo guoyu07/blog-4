@@ -11,19 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ArticleController@home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
-Route::get('add_articles', 'ArticleController@create');
-Route::get('post_articles', 'ArticleController@store');
-Route::get('edit_articles/{id}', 'ArticleController@edit');
 Route::get('article/{id}', 'ArticleController@show');
-Route::get('post_comment', 'CommentController@store');
-Route::get('up_articles/{id}', 'ArticleController@update');
-Route::post('del_articles', 'ArticleController@destroy');
-Route::post('del_comment', 'CommentController@destroy');
+
+Route::group(['middleware'=>'login'], function() {
+    Route::get('/home', 'ArticleController@userHome');
+    Route::get('add_articles', 'ArticleController@create');
+    Route::get('post_articles', 'ArticleController@store');
+    Route::get('edit_articles/{id}', 'ArticleController@edit');
+    Route::get('post_comment', 'CommentController@store');
+    Route::get('up_articles/{id}', 'ArticleController@update');
+    Route::post('del_articles', 'ArticleController@destroy');
+    Route::post('del_comment', 'CommentController@destroy');
+});

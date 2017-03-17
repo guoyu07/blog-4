@@ -104,4 +104,14 @@ class Blog
     {
        return  ArticleFactory::getUserArticleById($user_id);
     }
+
+    public static function getAllArticles()
+    {
+        return ArticleFactory::getAllArticles();
+    }
+
+    public static function getCommentNotifiction($user_id)
+    {
+        return ArticleFactory::getCommentNotifiction($user_id);
+    }
 }
