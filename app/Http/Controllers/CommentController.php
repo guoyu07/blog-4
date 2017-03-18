@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Flash;
 use Blog;
 
 class CommentController extends Controller
@@ -43,7 +44,12 @@ class CommentController extends Controller
         $data = $request->input();
         $user_id = Auth::user()->id;
         $res = Blog::addComment($data, $user_id);
-        dd($res);
+        if ($res) {
+            Flash::success('评论成功');
+            return redirect()->back();
+        }
+        Flash::error('评论失败');
+        return redirect()->back()->withInput($request->input());
     }
 
     /**
@@ -86,8 +92,14 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $user_id = Auth::user()->id;
+        $res = Myblog::delComment($request->comment_id, $user_id);
+        Flash::error('删除失败');
+        if ($res) {
+            Flash::success('删除成功');
+        }
+        return redirect()->back();
     }
 }

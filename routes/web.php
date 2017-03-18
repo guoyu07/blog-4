@@ -18,6 +18,7 @@ Auth::routes();
 Route::get('article/{id}', 'ArticleController@show');
 
 Route::group(['middleware'=>'login'], function() {
+    Route::get('myarticles', 'ArticleController@index');
     Route::get('/home', 'ArticleController@userHome');
     Route::get('add_articles', 'ArticleController@create');
     Route::get('post_articles', 'ArticleController@store');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Flash;
 use Blog;
 
 class ArticleController extends Controller
@@ -15,8 +16,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $user_id = Auth::user()->id;
         $articles = Blog::getUserArticles($user_id);
-        dd($articles);
+        return view('articles.articlesList', compact('articles'));
     }
 
     /**
@@ -30,7 +32,7 @@ class ArticleController extends Controller
         $article_id = $request->get('article_id');
         $user_id = Auth::user()->id;
         $respondata = Blog::getCreateOrUpdateArticles($article_id, $user_id);
-        dd($respondata);
+        return view('create_edit_articles', compact('respondata'));
     }
 
     /**
@@ -53,7 +55,12 @@ class ArticleController extends Controller
         $data['is_create'] = true;
         $user_id = Auth::user()->id;
         $respondata = Blog::createOrUpdateArticles($data, $user_id);
-        dd($respondata);
+        if ($respondata) {
+            Flash::success('创建成功');
+            return redirect()->action('ArticleController@show', ['id' => $respondata['id']]);
+        }
+        Flash::error('创建失败');
+        return redirect()->back()->withInput($request->input());
     }
 
     /**
@@ -65,7 +72,10 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Blog::getArticleById($id);
-        dd($article);
+        if ($article->is_blocked == 1 && (Auth::guest() || Auth::user()->id != $article->user_id)) {
+            return view('articles.error');
+        }
+        return view('articles.article', compact('article'));
     }
 
     /**
@@ -89,7 +99,12 @@ class ArticleController extends Controller
         $data['article_id'] = $id;
         $user_id = Auth::user()->id;
         $respondata = Blog::createOrUpdateArticles($data, $user_id);
-        dd($respondata);
+        if ($respondata) {
+            Flash::success('更新成功');
+            return redirect()->action('ArticleController@show', ['id' => $respondata['id']]);
+        }
+        Flash::error('更新失败');
+        return redirect()->back()->withErrors($validator)->withInput($request->input());
     }
 
     /**
@@ -103,6 +118,11 @@ class ArticleController extends Controller
     {
         $user_id = Auth::user()->id;
         $res = Blog::updateArticle($id, $user_id);
+        Flash::error('更新失败');
+        if ($res) {
+            Flash::success('更新成功');
+        }
+        return redirect()->back();
     }
 
     /**
@@ -111,16 +131,21 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         $user_id = Auth::user()->id;
         $res = Blog::delArticle($request->id, $user_id);
-        return $res;
+        Flash::error('创建失败');
+        if ($res) {
+            Flash::success('删除成功');
+        }
+        return redirect()->back();
     }
 
     public function home()
     {
         $articles = Blog::getAllArticles();
+        return view('home', compact('articles'));
     }
 
     public function userHome()
@@ -128,6 +153,8 @@ class ArticleController extends Controller
         $user_id = Auth::user()->id;
         $articles = Blog::getAllArticles();
         $noti_count = Blog::getCommentNotifiction($user_id);
+        return view('home', compact('articles'));
+
         dd($articles, $noti_count);
     }
 }
