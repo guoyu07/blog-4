@@ -179,6 +179,7 @@ return [
         JokerLinly\Blog\Providers\BlogServiceProvider::class,
         Overtrue\LaravelUEditor\UEditorServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
     ],
 
     /*
@@ -229,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Blog' => JokerLinly\Blog\Facades\Blog::class,
         'Flash' => Laracasts\Flash\Flash::class,
+        'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
     ],
 
 ];
