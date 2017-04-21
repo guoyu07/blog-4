@@ -11,15 +11,15 @@ class Article extends Model
 
     public function tag()
     {
-        return $this->belongsTo(ArticleTag::class, 'tags_id', 'id');
-    }    
+        return $this->belongsTo(ArticleTag::class, 'tag_id', 'id');
+    }
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class, 'article_id', 'id');
     }

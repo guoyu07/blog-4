@@ -1,12 +1,13 @@
 <?php
 namespace JokerLinly\Blog\Factory;
+
 use JokerLinly\Blog\Models\Article;
 use JokerLinly\Blog\Models\ArticleTag;
 use JokerLinly\Blog\Models\Comment;
 use JokerLinly\Blog\Models\User;
 
 /**
-* 
+*
 */
 class ArticleFactory
 {
@@ -44,7 +45,7 @@ class ArticleFactory
             $article = Article::where('user_id', $user_id)->where('id', $data['article_id'])->first();
             if (!$article) {
                 return false;
-            }     
+            }
         }
         $article->title = $data['title'];
         $article->intro = $data['intro'];

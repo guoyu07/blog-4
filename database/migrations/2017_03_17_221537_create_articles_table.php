@@ -17,11 +17,11 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->string('title')->index();
             $table->string('intro');
-            $table->integer('tags_id')->unsigned()->default(0);
+            $table->integer('tag_id')->unsigned()->nullable();
             $table->text('content');
             $table->integer('view_count')->unsigned()->default(0);
             $table->integer('user_id')->unsigned()->index();
-            $table->tinyInteger('is_blocked')->unsigned()->default(0);
+            $table->boolean('is_blocked')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

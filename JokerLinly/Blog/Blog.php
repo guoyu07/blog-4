@@ -5,9 +5,9 @@ namespace JokerLinly\Blog;
 use JokerLinly\Blog\Factory\ArticleFactory;
 
 /**
-* 
+*
 */
-class Blog 
+class Blog
 {
     public static function getCreateOrUpdateArticles($article_id, $user_id)
     {
@@ -16,7 +16,7 @@ class Blog
             'title'      => '',
             'intro'      => '',
             'content'    => '',
-            'tags_id'    => 0,
+            'tag_id'    => 0,
             'is_blocked' => 0
         ];
         $tags    = [];
@@ -35,12 +35,12 @@ class Blog
                 'title'      => $article_info->title,
                 'intro'      => $article_info->intro,
                 'content'    => $article_info->content,
-                'tags_id'    => $article_info->tags_id,
+                'tag_id'    => $article_info->tag_id,
                 'is_blocked' => $article_info->is_blocked,
-                "tags_name"  => $tags[$article_info->tags_id][0]['tag'],
+                'tags_name'  => $tags[$article_info->tag_id][0]['tag'],
             ];
             foreach ($tags as $key => $value) {
-                if (empty($article_info->tags_id) && $key ==  $article_info->tags_id) {
+                if (empty($article_info->tag_id) && $key ==  $article_info->tag_id) {
                     unset($tags[$key]);
                 }
             }
@@ -56,14 +56,14 @@ class Blog
     {
         if (!empty(trim($data['tag_name']))) {
             $tags_id = ArticleFactory::addArticleTags($data['tag_name'], $user_id);
-            $data['tags_id'] = $tags_id;
-        } 
-        return  ArticleFactory::addOrUpdateArticle($data, $user_id);
+            $data['tags_id'] = $tag_id;
+        }
+        return ArticleFactory::addOrUpdateArticle($data, $user_id);
     }
 
     public static function getArticleById($article_id)
     {
-        return  ArticleFactory::getArticleById($article_id);
+        return ArticleFactory::getArticleById($article_id);
     }
 
     public function addComment($data, $user_id)
@@ -87,22 +87,19 @@ class Blog
         if (!$article) {
             return  false;
         }
-        if ($article->is_blocked == 1) {
-            $article->is_blocked = 0;
-        } else {
-            $article->is_blocked = 1;
-        }
+
+        $article->is_blocked = !$article->is_blocked
         return $article->save();
     }
 
-    public static function delArticle($id, $user_id)
+    public static function deleteArticle($id, $user_id)
     {
-        return ArticleFactory::delArticle($id, $user_id);
+        return ArticleFactory::deleteArticle($id, $user_id);
     }
 
     public static function getUserArticles($user_id)
     {
-       return  ArticleFactory::getUserArticleById($user_id);
+       return ArticleFactory::getUserArticleById($user_id);
     }
 
     public static function getAllArticles()

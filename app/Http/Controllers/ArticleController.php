@@ -28,7 +28,6 @@ class ArticleController extends Controller
      */
     public function create(Request $request)
     {
-        // $article_id = null;
         $article_id = $request->get('article_id');
         $user_id = Auth::user()->id;
         $respondata = Blog::getCreateOrUpdateArticles($article_id, $user_id);
@@ -43,14 +42,6 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-/*        $data = [
-            'title' => "哇哈哈",
-            'intro' => "哈哈哈哇",
-            'tags_id' => 1,
-            'tag_name' => "",
-            'is_blocked' => 0,
-            'content' => "呜啦啦啦呜啦啦啦"
-        ];*/
         $data = $request->input();
         $data['is_create'] = true;
         $user_id = Auth::user()->id;
@@ -86,14 +77,6 @@ class ArticleController extends Controller
      */
     public function edit($id, Request $request)
     {
-/*        $data = [
-            'title' => "哇哈哈",
-            'intro' => "哈哈哈哇",
-            'tags_id' => 1,
-            'tag_name' => "test4",
-            'is_blocked' => 0,
-            'content' => "呜啦啦啦呜啦啦啦"
-        ];*/
         $data = $request->input();
         $data['is_create'] = false;
         $data['article_id'] = $id;
@@ -134,7 +117,7 @@ class ArticleController extends Controller
     public function destroy(Request $request)
     {
         $user_id = Auth::user()->id;
-        $res = Blog::delArticle($request->id, $user_id);
+        $res = Blog::deleteArticle($request->id, $user_id);
         Flash::error('创建失败');
         if ($res) {
             Flash::success('删除成功');
@@ -152,9 +135,7 @@ class ArticleController extends Controller
     {
         $user_id = Auth::user()->id;
         $articles = Blog::getAllArticles();
-        $noti_count = Blog::getCommentNotifiction($user_id);
+        // $noti_count = Blog::getCommentNotifiction($user_id);
         return view('home', compact('articles'));
-
-        dd($articles, $noti_count);
     }
 }
